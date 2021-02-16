@@ -27,7 +27,7 @@ namespace BonksList.Controllers
         }
 
         // GET: Listings/ShowSearchForm
-        public async Task<IActionResult> ShowSearchForm()
+        public IActionResult ShowSearchForm()
         {
             return View();
         }
@@ -66,12 +66,14 @@ namespace BonksList.Controllers
         // POST: Listings/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,imageUrl,description,price")] Listing listing)
         {
             if (ModelState.IsValid)
             {
+                listing.accountId = User.Identity.Name;
                 _context.Add(listing);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -80,6 +82,7 @@ namespace BonksList.Controllers
         }
 
         // GET: Listings/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -98,6 +101,7 @@ namespace BonksList.Controllers
         // POST: Listings/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,imageUrl,description,price")] Listing listing)
@@ -109,6 +113,22 @@ namespace BonksList.Controllers
 
             if (ModelState.IsValid)
             {
+                if (listing == null)
+                {
+                    return NotFound();
+                }
+
+                var prevlisting = await _context.Listing
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (prevlisting.accountId != User.Identity.Name)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    listing.accountId = User.Identity.Name;
+                }
+
                 try
                 {
                     _context.Update(listing);
@@ -131,6 +151,7 @@ namespace BonksList.Controllers
         }
 
         // GET: Listings/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -149,11 +170,18 @@ namespace BonksList.Controllers
         }
 
         // POST: Listings/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var listing = await _context.Listing.FindAsync(id);
+
+            if (listing.accountId != User.Identity.Name)
+            {
+                return NotFound();
+            }
+
             _context.Listing.Remove(listing);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -162,6 +190,19 @@ namespace BonksList.Controllers
         private bool ListingExists(int id)
         {
             return _context.Listing.Any(e => e.Id == id);
+        }
+        /// <summary>
+        /// Does exactly what it sounds like, be careful using this.
+        /// </summary>
+        private void EmptyListingTable()
+        {
+            foreach (var id in _context.Listing.Select(e => e.Id))
+            {
+                var entity = new Listing { Id = id };
+                _context.Listing.Attach(entity);
+                _context.Listing.Remove(entity);
+            }
+            _context.SaveChanges();
         }
     }
 }

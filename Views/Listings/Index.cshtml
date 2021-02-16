@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<BonksList.Models.Listing>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
 @{
     ViewData["Title"] = "Index";
@@ -21,47 +24,63 @@
             <th>
                 @Html.DisplayNameFor(model => model.price)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.accountId)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.imageUrl)
-            </td>
-            <td>
-                
-                @*@if (item.description.ToString().Length > 10)
-                {
-                    string parameterValue = item.description.ToString().Substring(0, 10) + "...";
-                    @parameterValue
-                }
-                else
-                {
-                    Html.DisplayFor(modelItem => item.description);
-                }*@
-                
-                @{ 
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.imageUrl)
+                </td>
+                <td>
+                    @*@if (item.description.ToString().Length > 10)
+                        {
+                            string parameterValue = item.description.ToString().Substring(0, 10) + "...";
+                            @parameterValue
+                        }
+                        else
+                        {
+                            Html.DisplayFor(modelItem => item.description);
+                        }*@
 
-                    string parameterValue = item.description.ToString();
-                    if (parameterValue.Length > 30)
-                    {
-                        parameterValue = parameterValue.Substring(0, 30) + " ...";
+                    @{
+
+                        string parameterValue = item.description.ToString();
+                        if (parameterValue.Length > 30)
+                        {
+                            parameterValue = parameterValue.Substring(0, 30) + " ...";
+                        }
                     }
-                }
-                
-                @parameterValue
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.price)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+
+                    @parameterValue
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+                <td>
+                    @if (SignInManager.IsSignedIn(User) && User.Identity.Name == item.accountId.ToString())
+                    {
+                        <span>Owned Listing</span>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.accountId)
+                    }
+                </td>
+                <td>
+                    @if (SignInManager.IsSignedIn(User) && User.Identity.Name == item.accountId.ToString())
+                    { 
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>     
+                    }
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

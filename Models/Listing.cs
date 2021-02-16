@@ -12,6 +12,8 @@ namespace BonksList.Models
         public string? imageUrl { get; set; }
         public string description { get; set; }
 
+        public string accountId { get; set; }
+
         [Column(TypeName = "decimal(20,2)")]
         public decimal price { get; set; }
 
