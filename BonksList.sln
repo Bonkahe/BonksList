@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BonksList", "BonksList.csproj", "{FA6CFB02-0192-4E64-91C5-B6A15DCBFAF2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BonksList", "BonksList.csproj", "{3AE2D927-3B9D-42B0-8906-CF95CB2B3655}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FA6CFB02-0192-4E64-91C5-B6A15DCBFAF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA6CFB02-0192-4E64-91C5-B6A15DCBFAF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA6CFB02-0192-4E64-91C5-B6A15DCBFAF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA6CFB02-0192-4E64-91C5-B6A15DCBFAF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AE2D927-3B9D-42B0-8906-CF95CB2B3655}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AE2D927-3B9D-42B0-8906-CF95CB2B3655}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AE2D927-3B9D-42B0-8906-CF95CB2B3655}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AE2D927-3B9D-42B0-8906-CF95CB2B3655}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {635BF3A5-E6F1-4477-A9EC-5F712E59ED0E}
+		SolutionGuid = {EF285725-B39A-45DE-98B7-D26940A09BBF}
 	EndGlobalSection
 EndGlobal
