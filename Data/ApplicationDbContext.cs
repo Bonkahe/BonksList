@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using BonksList.Models;
 
 namespace BonksList.Data
 {
@@ -12,5 +13,6 @@ namespace BonksList.Data
             : base(options)
         {
         }
+        public DbSet<BonksList.Models.Listing> Listing { get; set; }
     }
 }
