@@ -31,7 +31,27 @@
                 @Html.DisplayFor(modelItem => item.imageUrl)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.description)
+                
+                @*@if (item.description.ToString().Length > 10)
+                {
+                    string parameterValue = item.description.ToString().Substring(0, 10) + "...";
+                    @parameterValue
+                }
+                else
+                {
+                    Html.DisplayFor(modelItem => item.description);
+                }*@
+                
+                @{ 
+
+                    string parameterValue = item.description.ToString();
+                    if (parameterValue.Length > 30)
+                    {
+                        parameterValue = parameterValue.Substring(0, 30) + " ...";
+                    }
+                }
+                
+                @parameterValue
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.price)

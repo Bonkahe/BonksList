@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BonksList.Data;
 using BonksList.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BonksList.Controllers
 {
@@ -23,6 +24,18 @@ namespace BonksList.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Listing.ToListAsync());
+        }
+
+        // GET: Listings/ShowSearchForm
+        public async Task<IActionResult> ShowSearchForm()
+        {
+            return View();
+        }
+
+        // POST: Listings/ShowSearchResults
+        public async Task<IActionResult> ShowSearchResults(string SearchPhrase)
+        {
+            return View("Index", await _context.Listing.Where( j => j.description.Contains(SearchPhrase)).ToListAsync());
         }
 
         // GET: Listings/Details/5
@@ -44,6 +57,7 @@ namespace BonksList.Controllers
         }
 
         // GET: Listings/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
