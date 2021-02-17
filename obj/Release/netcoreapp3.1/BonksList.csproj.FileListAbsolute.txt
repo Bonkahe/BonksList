@@ -188,3 +188,4 @@ D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\BonksList.dll
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\BonksList.pdb
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\BonksList.genruntimeconfig.cache
+D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\Razor\Views\Listings\ShowSearchForm.cshtml.g.cs

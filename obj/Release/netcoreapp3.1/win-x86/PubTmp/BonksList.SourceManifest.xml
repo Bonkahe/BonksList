@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\win-x86\PubTmp\Out\" />
+  <dbfullsql path="D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\win-x86\PubTmp\EFSQLScripts\BonksList.Data.ApplicationDbContext.sql" />
+</sitemanifest>

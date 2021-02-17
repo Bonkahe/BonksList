@@ -9,7 +9,11 @@ namespace BonksList.Models
     public class Listing
     {
         public int Id { get; set; }
+
+        #nullable enable
         public string? imageUrl { get; set; }
+        #nullable disable
+
         public string description { get; set; }
 
         public string accountId { get; set; }
