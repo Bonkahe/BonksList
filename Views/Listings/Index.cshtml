@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BonksList.Models.Listing>
+﻿@model SearchListingsModel
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
@@ -16,22 +16,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.imageUrl)
+                <span>Image</span>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.description)
+                <span>Description</span>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.price)
+                <span>Price</span>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.accountId)
+                <span>Email of Poster</span>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.listings)
         {
             <tr>
                 <td>
@@ -67,7 +67,11 @@
                     @parameterValue
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.price)
+                    @{ 
+                        string price = item.price.ToString();
+                        price += "$";
+                    }
+                    @price
                 </td>
                 <td>
                     @if (SignInManager.IsSignedIn(User) && User.Identity.Name == item.accountId.ToString())

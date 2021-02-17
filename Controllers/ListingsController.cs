@@ -25,7 +25,13 @@ namespace BonksList.Controllers
         // GET: Listings
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Listing.ToListAsync());
+            SearchListingsModel newListingModel = new SearchListingsModel
+            {
+                filters = GetFilters(),
+                currentFilter = new SelectListItem() { Text = "None", Value = string.Empty },
+                listings = await _context.Listing.ToListAsync()
+            };
+            return View(newListingModel);
         }
 
         // GET: Listings/ShowSearchForm
@@ -37,7 +43,14 @@ namespace BonksList.Controllers
         // POST: Listings/ShowSearchResults
         public async Task<IActionResult> ShowSearchResults(string SearchPhrase)
         {
-            return View("Index", await _context.Listing.Where( j => j.description.Contains(SearchPhrase)).ToListAsync());
+            SearchListingsModel newListingModel = new SearchListingsModel
+            {
+                filters = GetFilters(),
+                currentFilter = new SelectListItem() { Text = "None", Value = string.Empty },
+                listings = await _context.Listing.Where(j => j.description.Contains(SearchPhrase)).ToListAsync()
+            };
+
+            return View("Index", newListingModel);
         }
 
         // GET: Listings/Details/5
@@ -224,6 +237,11 @@ namespace BonksList.Controllers
             _context.SaveChanges();
         }
 
+        /// <summary>
+        /// Check if the url given is an image url, actually checks the server for this, so it does have overhead.
+        /// </summary>
+        /// <param name="URL">The url to be checked.</param>
+        /// <returns>True if the url is viable as an image.</returns>
         bool IsImageUrl(string URL)
         {
             Uri uriResult;
@@ -242,6 +260,21 @@ namespace BonksList.Controllers
                 return resp.ContentType.ToLower(CultureInfo.InvariantCulture)
                            .StartsWith("image/");
             }
+        }
+
+        /// <summary>
+        /// Populates filter List
+        /// </summary>
+        /// <returns>list of filter options</returns>
+        private IEnumerable<SelectListItem> GetFilters()
+        {
+            return new SelectListItem[]
+            {
+                new SelectListItem() { Text = "None", Value = string.Empty },
+                new SelectListItem() { Text = "For Sale", Value = "forsale" },
+                new SelectListItem() { Text = "For Free", Value = "forfree" },
+                new SelectListItem() { Text = "Service", Value = "service" }
+            };
         }
     }
 }
