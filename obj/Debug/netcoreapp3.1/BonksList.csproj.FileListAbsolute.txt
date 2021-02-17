@@ -189,3 +189,8 @@ D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Debug\netcoreapp3.1\R
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Debug\netcoreapp3.1\Razor\Views\Listings\Edit.cshtml.g.cs
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Debug\netcoreapp3.1\Razor\Views\Listings\Index.cshtml.g.cs
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Debug\netcoreapp3.1\Razor\Views\Listings\ShowSearchForm.cshtml.g.cs
+D:\Workspace(Backed up)\Programming Projects\BonksList\bin\Debug\netcoreapp3.1\Azure.Core.dll
+D:\Workspace(Backed up)\Programming Projects\BonksList\bin\Debug\netcoreapp3.1\Azure.Extensions.AspNetCore.Configuration.Secrets.dll
+D:\Workspace(Backed up)\Programming Projects\BonksList\bin\Debug\netcoreapp3.1\Azure.Identity.dll
+D:\Workspace(Backed up)\Programming Projects\BonksList\bin\Debug\netcoreapp3.1\Azure.Security.KeyVault.Secrets.dll
+D:\Workspace(Backed up)\Programming Projects\BonksList\bin\Debug\netcoreapp3.1\Microsoft.Identity.Client.Extensions.Msal.dll

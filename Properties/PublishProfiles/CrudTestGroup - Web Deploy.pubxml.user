@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAEW9rC9fXSEK2ErA8ett1+gAAAAACAAAAAAAQZgAAAAEAACAAAACgCtBFzlIQLWUXGTPWx8ZbzgpHIQ/Yf3ov6lTzKApdkQAAAAAOgAAAAAIAACAAAADQQG3E58zG7XqUf3uBOjTK+4XJ3OorjcVVeMuH6tw2I4AAAADOKapCmOvgYpE0/EmurY3mipRdqVCAeBEQ1A5dlUC0UVxvdPro66T4ZmbQX54jzalqB/+Y64El9aUYoyASXkRc86Be1ef271IpRTZ50wAvRhBDqUHDy2QDJa8Em7pFEGOXcJjLn37fFZIDvMUcead1J9xQEQ6u4R4oYHpVzU4sb0AAAAB5NH4Xjgp1d1cyMUNqS8uSYIPdWIwPcbjplWVUdVwke3ZvaiP8Oooq67w7FF1+xavOemHC7OgcYgyXeZetfd/U</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=tcp:crudtestgroupdbdbserver.database.windows.net,1433%3bInitial Catalog=CrudTestGroupDB%3bUser Id=sqladmin%40crudtestgroupdbdbserver%3bPassword=password123%2a</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="BonksList.Data.ApplicationDbContext">
+      <Value>Data Source=tcp:crudtestgroupdbdbserver.database.windows.net,1433%3bInitial Catalog=CrudTestGroupDB%3bUser Id=sqladmin%40crudtestgroupdbdbserver%3bPassword=password123%2a</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

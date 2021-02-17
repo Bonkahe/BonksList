@@ -40,6 +40,10 @@ D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\PubTmp\Out\BonksList.dll
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\PubTmp\Out\BonksList.runtimeconfig.json
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\PubTmp\Out\BonksList.pdb
+D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\PubTmp\Out\Azure.Core.dll
+D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\PubTmp\Out\Azure.Extensions.AspNetCore.Configuration.Secrets.dll
+D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\PubTmp\Out\Azure.Identity.dll
+D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\PubTmp\Out\Azure.Security.KeyVault.Secrets.dll
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Cryptography.Internal.dll
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
@@ -80,6 +84,7 @@ D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Options.dll
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Primitives.dll
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Identity.Client.dll
+D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Identity.Client.Extensions.Msal.dll
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.IdentityModel.JsonWebTokens.dll
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.IdentityModel.Logging.dll
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.IdentityModel.Protocols.dll
