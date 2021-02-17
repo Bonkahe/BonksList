@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using BonksList.Data;
 using BonksList.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Net;
+using System.Globalization;
 
 namespace BonksList.Controllers
 {
@@ -74,6 +76,15 @@ namespace BonksList.Controllers
             if (ModelState.IsValid)
             {
                 listing.accountId = User.Identity.Name;
+
+                if (listing.imageUrl != null)
+                {
+                    if (!IsImageUrl(listing.imageUrl))
+                    {
+                        listing.imageUrl = null;
+                    }
+                }
+
                 _context.Add(listing);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -127,6 +138,14 @@ namespace BonksList.Controllers
                 else
                 {
                     listing.accountId = User.Identity.Name;
+                }
+
+                if (listing.imageUrl != null)
+                {
+                    if (!IsImageUrl(listing.imageUrl))
+                    {
+                        listing.imageUrl = null;
+                    }
                 }
 
                 try
@@ -203,6 +222,26 @@ namespace BonksList.Controllers
                 _context.Listing.Remove(entity);
             }
             _context.SaveChanges();
+        }
+
+        bool IsImageUrl(string URL)
+        {
+            Uri uriResult;
+            bool result = Uri.TryCreate(URL, UriKind.Absolute, out uriResult)
+                && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+
+            if (!result)
+            {
+                return false;
+            }
+
+            var req = (HttpWebRequest)HttpWebRequest.Create(uriResult);
+            req.Method = "HEAD";
+            using (var resp = req.GetResponse())
+            {
+                return resp.ContentType.ToLower(CultureInfo.InvariantCulture)
+                           .StartsWith("image/");
+            }
         }
     }
 }

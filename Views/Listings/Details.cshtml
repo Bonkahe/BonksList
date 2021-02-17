@@ -14,19 +14,26 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.imageUrl)
+            <span>Image:</span>
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.imageUrl)
+            @if (Model.imageUrl != null)
+            {
+                <img src="@Model.imageUrl" alt="ListingImage" style="max-width: 500px; max-height: 500px;">
+            }
+            else
+            {
+                <span>No image provided</span>
+            }
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.description)
+            <span>Description:</span>
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.description)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.price)
+            <span>Price:</span>
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.price)
