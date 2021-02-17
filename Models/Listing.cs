@@ -13,10 +13,9 @@ namespace BonksList.Models
         #nullable enable
         public string? imageUrl { get; set; }
         #nullable disable
-
         public string description { get; set; }
-
         public string accountId { get; set; }
+        public string listingType { get; set; }
 
         [Column(TypeName = "decimal(20,2)")]
         public decimal price { get; set; }

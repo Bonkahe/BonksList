@@ -12,6 +12,8 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<select asp-for="currentFilter" asp-items="Model.filters"></select>
+<a asp-action="UpdateFilter" asp-route-id="@Model.currentFilter">UpdateFilter</a>
 <table class="table">
     <thead>
         <tr>
@@ -67,7 +69,7 @@
                     @parameterValue
                 </td>
                 <td>
-                    @{ 
+                    @{
                         string price = item.price.ToString();
                         price += "$";
                     }
@@ -85,9 +87,9 @@
                 </td>
                 <td>
                     @if (SignInManager.IsSignedIn(User) && User.Identity.Name == item.accountId.ToString())
-                    { 
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>     
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     }
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                 </td>

@@ -25,6 +25,7 @@ namespace BonksList.Controllers
         // GET: Listings
         public async Task<IActionResult> Index()
         {
+
             SearchListingsModel newListingModel = new SearchListingsModel
             {
                 filters = GetFilters(),
@@ -51,6 +52,31 @@ namespace BonksList.Controllers
             };
 
             return View("Index", newListingModel);
+        }
+
+        public async Task<IActionResult> UpdateFilter(SelectListItem selectedFilter)
+        {
+            if (selectedFilter.Text != "None")
+            {
+                // selected a filter
+                SearchListingsModel newListingModel = new SearchListingsModel
+                {
+                    filters = GetFilters(),
+                    currentFilter = selectedFilter,
+                    listings = await _context.Listing.ToListAsync()
+                };
+                return View("Index", newListingModel);
+            }
+            else
+            {
+                SearchListingsModel newListingModel = new SearchListingsModel
+                {
+                    filters = GetFilters(),
+                    currentFilter = selectedFilter,
+                    listings = await _context.Listing.Where(j => j.listingType == selectedFilter.Value).ToListAsync()
+                };
+                return View("Index", newListingModel);
+            }
         }
 
         // GET: Listings/Details/5
@@ -84,7 +110,7 @@ namespace BonksList.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,imageUrl,description,price")] Listing listing)
+        public async Task<IActionResult> Create([Bind("Id,imageUrl,description,price,listingType")] Listing listing)
         {
             if (ModelState.IsValid)
             {
@@ -142,7 +168,7 @@ namespace BonksList.Controllers
                     return NotFound();
                 }
 
-                var prevlisting = await _context.Listing
+                var prevlisting = await _context.Listing.AsNoTracking()
                     .FirstOrDefaultAsync(m => m.Id == id);
                 if (prevlisting.accountId != User.Identity.Name)
                 {
@@ -269,7 +295,7 @@ namespace BonksList.Controllers
         private IEnumerable<SelectListItem> GetFilters()
         {
             return new SelectListItem[]
-            {
+{
                 new SelectListItem() { Text = "None", Value = string.Empty },
                 new SelectListItem() { Text = "For Sale", Value = "forsale" },
                 new SelectListItem() { Text = "For Free", Value = "forfree" },
