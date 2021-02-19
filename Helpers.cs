@@ -7,6 +7,7 @@ namespace BonksList
 {
     public static class Helpers
     {
-        public static int listingCountPerPage = 3;
+        //just a public variable that can be referenced for the number of results per page.
+        public static int listingCountPerPage = 5;
     }
 }

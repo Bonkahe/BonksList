@@ -43,7 +43,12 @@ namespace BonksList.Controllers
             return View();
         }
 
-        // POST: Listings/ShowSearchResults
+        /// <summary>
+        /// Pulls up the results list, if given search parameters it will filter by them.
+        /// </summary>
+        /// <param name="SearchPhrase">A nullable string, if nothing is given, it will return all listings.</param>
+        /// <param name="SortOrder">Can be null, blank, price, or price_desc, if it exists it will try to sort by it</param>
+        /// <param name="page">Used for the paged views</param>
         public async Task<IActionResult> ShowSearchResults(string? SearchPhrase, string? SortOrder, int? page)
         {
             ViewBag.searchTerm = SearchPhrase;
@@ -54,11 +59,14 @@ namespace BonksList.Controllers
 
             if (String.IsNullOrEmpty(SearchPhrase))
             {
-                newlistings = await _context.Listing.ToListAsync();
+                newlistings = await (from s in _context.Listing
+                                    select s).ToListAsync();
             }
             else
             {
-                newlistings = await _context.Listing.Where(j => j.description.Contains(SearchPhrase)).ToListAsync();
+                newlistings = await (from s in _context.Listing
+                                     where s.description.Contains(SearchPhrase)
+                                     select s).ToListAsync();
             }
 
             if (!String.IsNullOrEmpty(SortOrder))
@@ -78,19 +86,6 @@ namespace BonksList.Controllers
 
             int pageSize = Helpers.listingCountPerPage;
             int pageNumber = page ?? 1;
-            IPagedList<Listing> pagedlistings = newlistings.ToPagedList(pageNumber, pageSize);
-
-            return View("Index", pagedlistings);
-        }
-
-        public async Task<IActionResult> Clear()
-        {
-            List<Listing> newlistings = await _context.Listing.ToListAsync();
-            ViewBag.searchTerm = "";
-            ViewBag.sortOrder = "";
-
-            int pageSize = Helpers.listingCountPerPage;
-            int pageNumber = 1;
             IPagedList<Listing> pagedlistings = newlistings.ToPagedList(pageNumber, pageSize);
 
             return View("Index", pagedlistings);
