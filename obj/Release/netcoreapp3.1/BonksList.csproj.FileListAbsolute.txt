@@ -193,3 +193,16 @@ D:\Workspace(Backed up)\Programming Projects\BonksList\bin\Release\netcoreapp3.1
 D:\Workspace(Backed up)\Programming Projects\BonksList\bin\Release\netcoreapp3.1\Azure.Identity.dll
 D:\Workspace(Backed up)\Programming Projects\BonksList\bin\Release\netcoreapp3.1\Azure.Security.KeyVault.Secrets.dll
 D:\Workspace(Backed up)\Programming Projects\BonksList\bin\Release\netcoreapp3.1\Microsoft.Identity.Client.Extensions.Msal.dll
+D:\Workspace(Backed up)\Programming Projects\BonksList\bin\Release\netcoreapp3.1\System.Web.Mvc.dll
+D:\Workspace(Backed up)\Programming Projects\BonksList\bin\Release\netcoreapp3.1\System.Web.Razor.dll
+D:\Workspace(Backed up)\Programming Projects\BonksList\bin\Release\netcoreapp3.1\System.Web.Helpers.dll
+D:\Workspace(Backed up)\Programming Projects\BonksList\bin\Release\netcoreapp3.1\System.Web.WebPages.Deployment.dll
+D:\Workspace(Backed up)\Programming Projects\BonksList\bin\Release\netcoreapp3.1\System.Web.WebPages.Razor.dll
+D:\Workspace(Backed up)\Programming Projects\BonksList\bin\Release\netcoreapp3.1\System.Web.WebPages.dll
+D:\Workspace(Backed up)\Programming Projects\BonksList\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+D:\Workspace(Backed up)\Programming Projects\BonksList\bin\Release\netcoreapp3.1\Microsoft.Web.Infrastructure.dll
+D:\Workspace(Backed up)\Programming Projects\BonksList\bin\Release\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+D:\Workspace(Backed up)\Programming Projects\BonksList\bin\Release\netcoreapp3.1\X.PagedList.dll
+D:\Workspace(Backed up)\Programming Projects\BonksList\bin\Release\netcoreapp3.1\X.PagedList.Mvc.dll
+D:\Workspace(Backed up)\Programming Projects\BonksList\bin\Release\netcoreapp3.1\X.PagedList.Mvc.Core.dll
+D:\Workspace(Backed up)\Programming Projects\BonksList\bin\Release\netcoreapp3.1\X.PagedList.Web.Common.dll

@@ -97,6 +97,15 @@ body {
     min-width: 70%;
 }
 
+.listingContainer{
+    height: 200px;
+}
+
+.listingContainer img{
+    max-height: 200px;
+    max-width: 200px;
+}
+
 @media (min-width: 768px) {
     .searchContainer {
         /*flex-direction: column;*/
