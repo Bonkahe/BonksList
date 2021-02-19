@@ -26,8 +26,11 @@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.price)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.price)
+        <dd class="col-sm-10">
+            @{
+                string price = "$" + Model.price.ToString();
+            }
+            @price
         </dd>
     </dl>
     

@@ -1,4 +1,5 @@
 ﻿using System;
+using X.PagedList;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,14 +26,15 @@ namespace BonksList.Controllers
         // GET: Listings
         public async Task<IActionResult> Index()
         {
+            List<Listing> newlistings = await _context.Listing.ToListAsync();
+            ViewBag.searchTerm = "";
+            ViewBag.sortOrder = "";
 
-            SearchListingsModel newListingModel = new SearchListingsModel
-            {
-                filters = GetFilters(),
-                currentFilter = new SelectListItem() { Text = "None", Value = string.Empty },
-                listings = await _context.Listing.ToListAsync()
-            };
-            return View(newListingModel);
+            int pageSize = Helpers.listingCountPerPage;
+            int pageNumber = 1;
+            IPagedList<Listing> pagedlistings = newlistings.ToPagedList(pageNumber, pageSize);
+
+            return View("Index", pagedlistings);
         }
 
         // GET: Listings/ShowSearchForm
@@ -42,42 +44,58 @@ namespace BonksList.Controllers
         }
 
         // POST: Listings/ShowSearchResults
-        public async Task<IActionResult> ShowSearchResults(string SearchPhrase)
+        public async Task<IActionResult> ShowSearchResults(string? SearchPhrase, string? SortOrder, int? page)
         {
-            SearchListingsModel newListingModel = new SearchListingsModel
-            {
-                filters = GetFilters(),
-                currentFilter = new SelectListItem() { Text = "None", Value = string.Empty },
-                listings = await _context.Listing.Where(j => j.description.Contains(SearchPhrase)).ToListAsync()
-            };
+            ViewBag.searchTerm = SearchPhrase;
+            ViewBag.sortOrder = SortOrder;
+            //SearchListingsModel newListingModel = new SearchListingsModel();
 
-            return View("Index", newListingModel);
-        }
+            List<Listing> newlistings = new List<Listing>(); 
 
-        public async Task<IActionResult> UpdateFilter(SelectListItem selectedFilter)
-        {
-            if (selectedFilter.Text != "None")
+            if (String.IsNullOrEmpty(SearchPhrase))
             {
-                // selected a filter
-                SearchListingsModel newListingModel = new SearchListingsModel
-                {
-                    filters = GetFilters(),
-                    currentFilter = selectedFilter,
-                    listings = await _context.Listing.ToListAsync()
-                };
-                return View("Index", newListingModel);
+                newlistings = await _context.Listing.ToListAsync();
             }
             else
             {
-                SearchListingsModel newListingModel = new SearchListingsModel
-                {
-                    filters = GetFilters(),
-                    currentFilter = selectedFilter,
-                    listings = await _context.Listing.Where(j => j.listingType == selectedFilter.Value).ToListAsync()
-                };
-                return View("Index", newListingModel);
+                newlistings = await _context.Listing.Where(j => j.description.Contains(SearchPhrase)).ToListAsync();
             }
+
+            if (!String.IsNullOrEmpty(SortOrder))
+            {
+                switch (SortOrder)
+                {
+                    case "price_desc":
+                        newlistings = newlistings.OrderByDescending(s => s.price).ToList();
+                        break;
+                    case "price":
+                        newlistings = newlistings.OrderBy(s => s.price).ToList();
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            int pageSize = Helpers.listingCountPerPage;
+            int pageNumber = page ?? 1;
+            IPagedList<Listing> pagedlistings = newlistings.ToPagedList(pageNumber, pageSize);
+
+            return View("Index", pagedlistings);
         }
+
+        public async Task<IActionResult> Clear()
+        {
+            List<Listing> newlistings = await _context.Listing.ToListAsync();
+            ViewBag.searchTerm = "";
+            ViewBag.sortOrder = "";
+
+            int pageSize = Helpers.listingCountPerPage;
+            int pageNumber = 1;
+            IPagedList<Listing> pagedlistings = newlistings.ToPagedList(pageNumber, pageSize);
+
+            return View("Index", pagedlistings);
+        }
+
 
         // GET: Listings/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -286,21 +304,6 @@ namespace BonksList.Controllers
                 return resp.ContentType.ToLower(CultureInfo.InvariantCulture)
                            .StartsWith("image/");
             }
-        }
-
-        /// <summary>
-        /// Populates filter List
-        /// </summary>
-        /// <returns>list of filter options</returns>
-        private IEnumerable<SelectListItem> GetFilters()
-        {
-            return new SelectListItem[]
-{
-                new SelectListItem() { Text = "None", Value = string.Empty },
-                new SelectListItem() { Text = "For Sale", Value = "forsale" },
-                new SelectListItem() { Text = "For Free", Value = "forfree" },
-                new SelectListItem() { Text = "Service", Value = "service" }
-            };
         }
     }
 }

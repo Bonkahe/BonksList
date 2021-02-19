@@ -1,99 +1,120 @@
-﻿@model SearchListingsModel
-@using Microsoft.AspNetCore.Identity
+﻿
+@using Microsoft.AspNetCore.Identity;
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@using X.PagedList; @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
+@using X.PagedList.Mvc.Core.Fluent
+@using X.PagedList.Web.Common
+@model X.PagedList.IPagedList<Listing>
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
+<link href="~/css/PagedList.css" rel="stylesheet" type="text/css" />
 @{
-    ViewData["Title"] = "Index";
+    ViewBag.Title = "Profiles";
 }
-
-<h1>Index</h1>
-
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<select asp-for="currentFilter" asp-items="Model.filters"></select>
-<a asp-action="UpdateFilter" asp-route-id="@Model.currentFilter">UpdateFilter</a>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                <span>Image</span>
-            </th>
-            <th>
-                <span>Description</span>
-            </th>
-            <th>
-                <span>Price</span>
-            </th>
-            <th>
-                <span>Email of Poster</span>
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.listings)
-        {
+<div class="searchPanel">
+    <form asp-action="ShowSearchResults">
+        <div class="form-group">
+            <label for="SearchPhrase" class="control-label">Search:</label>
+            <input name="SearchPhrase" value="@ViewBag.searchTerm" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Search" class="btn btn-primary" />
+            <a asp-action="Clear" asp-route-id="" class="btn btn-primary">Clear</a>
+        </div>
+    </form>
+</div>
+<div class="searchPanel resultsPanel">
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @if (item.imageUrl != null)
-                    {
-                        <img src="@item.imageUrl" alt="ListingImage" style="max-width: 200px; max-height: 200px;">
-                    }
-                    else
-                    {
-                        <span>No image provided</span>
-                    }
-                </td>
-                <td>
-                    @*@if (item.description.ToString().Length > 10)
+                <th>
+                    <span>Image</span>
+                </th>
+                <th>
+                    <span>Description</span>
+                </th>
+                <th>
+                    @*<span>Price</span>*@
+                    @{
+                        string priceSort = "Sort by Price";
+                        if (ViewBag.sortOrder == "price")
                         {
-                            string parameterValue = item.description.ToString().Substring(0, 10) + "...";
-                            @parameterValue
+                            priceSort = "Sort by Price Descending";
+                        }
+                        else if (ViewBag.sortOrder == "price_desc")
+                        {
+                            priceSort = "Sort by Price Ascending";
+                        }
+                    }
+                    @Html.ActionLink(priceSort, "ShowSearchResults", new { SearchPhrase = ViewBag.searchTerm, sortOrder = ViewBag.sortOrder == "price" ? "price_desc" : "price" })
+                </th>
+                <th>
+                    <span>Email of Poster</span>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="listingContainer">
+                    <td>
+                        @if (item.imageUrl != null)
+                        {
+                            <img src="@item.imageUrl" alt="ListingImage">
                         }
                         else
                         {
-                            Html.DisplayFor(modelItem => item.description);
-                        }*@
-
-                    @{
-
-                        string parameterValue = item.description.ToString();
-                        if (parameterValue.Length > 30)
-                        {
-                            parameterValue = parameterValue.Substring(0, 30) + " ...";
+                            <span>No image provided</span>
                         }
-                    }
+                    </td>
+                    <td>
 
-                    @parameterValue
-                </td>
-                <td>
-                    @{
-                        string price = item.price.ToString();
-                        price += "$";
-                    }
-                    @price
-                </td>
-                <td>
-                    @if (SignInManager.IsSignedIn(User) && User.Identity.Name == item.accountId.ToString())
-                    {
-                        <span>Owned Listing</span>
-                    }
-                    else
-                    {
-                        @Html.DisplayFor(modelItem => item.accountId)
-                    }
-                </td>
-                <td>
-                    @if (SignInManager.IsSignedIn(User) && User.Identity.Name == item.accountId.ToString())
-                    {
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    }
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                        @{
+                            string parameterValue = item.description.ToString();
+                            if (parameterValue.Length > 30)
+                            {
+                                parameterValue = parameterValue.Substring(0, 30) + " ...";
+                            }
+                        }
+
+                        @parameterValue
+                    </td>
+                    <td>
+                        @{
+                            string price = "$" + item.price.ToString();
+                        }
+                        @price
+                    </td>
+                    <td>
+                        @if (SignInManager.IsSignedIn(User) && User.Identity.Name == item.accountId.ToString())
+                        {
+                            <span>Owned Listing</span>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.accountId)
+                        }
+                    </td>
+                    <td>
+                        @if (SignInManager.IsSignedIn(User) && User.Identity.Name == item.accountId.ToString())
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        }
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("ShowSearchResults",
+    new { page, SortOrder = ViewBag.sortOrder, SearchPhrase = ViewBag.searchTerm }))
+</div>

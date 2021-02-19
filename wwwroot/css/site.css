@@ -69,3 +69,48 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* Listings Stylings
+-------------------------------------------------- */
+
+.searchContainer {
+    height: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.searchPanel {
+    width:100%;
+    max-width: 100%;
+    min-width: 30%;
+    border: 1px solid #e5e5e5;
+    overflow: auto;
+}
+
+.table{
+    /*width: auto;*/
+}
+
+.resultsPanel{
+    min-width: 70%;
+}
+
+.listingContainer{
+    height: 200px;
+}
+
+.listingContainer img{
+    max-height: 200px;
+    max-width: 200px;
+}
+
+@media (min-width: 768px) {
+    .searchContainer {
+        /*flex-direction: column;*/
+    }
+    .searchPanel{
+        width:auto;
+    }
+}

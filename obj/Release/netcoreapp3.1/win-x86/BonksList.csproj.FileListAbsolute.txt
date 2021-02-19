@@ -157,7 +157,6 @@ D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\win-x86\Razor\Views\Listings\Details.cshtml.g.cs
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\win-x86\Razor\Views\Listings\Edit.cshtml.g.cs
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\win-x86\Razor\Views\Listings\Index.cshtml.g.cs
-D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\win-x86\Razor\Views\Listings\ShowSearchForm.cshtml.g.cs
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\win-x86\Razor\Views\Shared\Error.cshtml.g.cs
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\win-x86\Razor\Views\Shared\_Layout.cshtml.g.cs
 D:\Workspace(Backed up)\Programming Projects\BonksList\obj\Release\netcoreapp3.1\win-x86\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
